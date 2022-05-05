@@ -1,34 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## run dev server
 
-## Getting Started
-
-First, run the development server:
-
-```bash
 npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## run buid
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+npm run build
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## packages used
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+tailwind and tailwind heroIcons
 
-## Learn More
+## Test Questions
 
-To learn more about Next.js, take a look at the following resources:
+> 1. What part of your solution are you most proud of and why?
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+not really proud of my finished test, but I was able to format my template quickly and render all the products onto the page without any issues, aside from next/image throwing errors.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> 2. What was the most difficult part of this?
 
-## Deploy on Vercel
+I wanted to reload the information on screen based on user input. My plan was to do this via url perameters passed to getServerSideProps, but I ran into bugs and ultimately never got to filter results the way I wanted. Currently results are filtered through rerendering the component with useEffect.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> 3. If you had more time, what would you have done to improve this task?
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I should have set up the different pages for each category and focused on them before worrying about sorting the results. That was I would've had a more complete website with navigation links for each category. I spent too much time on one issue and it has cost me progress.
+
+> 4. What would you change about this test to make it better?
+
+The test itself wasn't too bad, so I'm not sure what I would have changed. For me personaly, I should have planned better.
+
+>

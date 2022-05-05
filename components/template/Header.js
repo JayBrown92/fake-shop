@@ -35,9 +35,9 @@ export default function Header() {
 
   return (
     <header
-      className={` text-black mb-16 ${
+      className={` text-black mb-16  ${
         fixedNav
-          ? "shadow-md fixed top-0 left-0 z-50 min-w-full sticky-effect "
+          ? "shadow-md fixed top-0 left-0 z-50 min-w-full sticky-effect opacity-1 bg-white "
           : "relative"
       }`}
     >
