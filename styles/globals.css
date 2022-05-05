@@ -1,25 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
 
-h1 {
-  font-size: 2rem;
-}
-h2 {
-  font-size: 1.5rem;
-}
-
-h3 {
-  font-size: 1rem;
-}
-P {
-  margin-bottom: 1rem;
-}
-html,
-body {
-  height: 100%;
-}
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+  h3 {
+    font-size: 1rem;
+  }
+  P {
+    margin-bottom: 1rem;
+  }
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
 }
