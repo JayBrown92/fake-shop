@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Image from "next/image";
 
-export default function Card({ image, title, price, description }) {
+export default function Card({ classes, image, title, price, description }) {
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
     setShowModal(!showModal);
   };
   return (
-    <>
+    <div className={classes}>
       <Image src={image} alt={`${title}`} width={291} height={291} />
 
       <div className="p-4">
@@ -27,6 +27,6 @@ export default function Card({ image, title, price, description }) {
           showModal ? "" : "hidden"
         }`}
       ></div>
-    </>
+    </div>
   );
 }
