@@ -5,7 +5,7 @@ export default function Template({ children }) {
   return (
     <>
       <Header />
-      <main className="h-full">{children}</main>
+      <main>{children}</main>
 
       <Footer />
     </>
