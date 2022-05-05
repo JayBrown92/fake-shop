@@ -1,24 +1,31 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import Card from "../../components/UI/Card";
 import Container from "../../components/UI/Container";
 import { FilterIcon } from "@heroicons/react/solid";
 
-const filterResultDesc = "";
-
 export default function products({ products }) {
+  const [productData, setProductData] = useState(products);
   const [sortDesc, setSortDesc] = useState(false);
-  const router = useRouter();
 
   const handleFilter = () => {
     setSortDesc(!sortDesc);
-
-    if (sortDesc) {
-      filterResultDesc = "?sort=desc";
-    } else {
-      filterResultDesc = "";
-    }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (sortDesc) {
+        const res = await fetch(
+          `https://fakestoreapi.com/products${"?sort=desc"}`
+        );
+
+        const data = await res.json();
+
+        setProductData(data);
+      }
+    };
+
+    fetchData();
+  }, [sortDesc]);
 
   return (
     <>
@@ -44,7 +51,7 @@ export default function products({ products }) {
         <Container
           classes={"flex flex-wrap justify-between  gap-y-4 md:gap-y-8"}
         >
-          {products.map((product) => {
+          {productData.map((product) => {
             return (
               <Card
                 classes={
@@ -64,12 +71,8 @@ export default function products({ products }) {
   );
 }
 
-export async function getStaticProps(context) {
-  const res = await fetch(
-    `https://fakestoreapi.com/products${filterResultDesc}`
-  );
-
-  console.log(res);
+export async function getServerSideProps() {
+  const res = await fetch(`https://fakestoreapi.com/products`);
 
   const data = await res.json();
   return {
