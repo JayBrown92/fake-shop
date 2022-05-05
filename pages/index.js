@@ -1,41 +1,85 @@
-import Head from "next/head";
+import { useState, useEffect } from "react";
+import Card from "../components/UI/Card";
 import Container from "../components/UI/Container";
+import { FilterIcon } from "@heroicons/react/solid";
 
 export default function Home({ products }) {
-  console.log(products);
+  const [productData, setProductData] = useState(products);
+  const [sortDesc, setSortDesc] = useState(false);
+
+  const handleFilter = () => {
+    setSortDesc(!sortDesc);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (sortDesc) {
+        const res = await fetch(
+          `https://fakestoreapi.com/products${"?sort=desc"}`
+        );
+
+        const data = await res.json();
+
+        setProductData(data);
+      } else {
+        setProductData(products);
+      }
+    };
+
+    fetchData();
+  }, [sortDesc]);
+
   return (
     <>
-      <Head>
-        <title>Fake Shop</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <section id="intro" className="mb-12 md:mb-16">
-        <Container>
-          <h1 className=" mb-12 md:mb-16 text-center font-bold">
-            Welcome to Fake Shop
-          </h1>
+      <section id="products-intro" className="mb-8 md:mb-16">
+        <Container classes={"relative"}>
+          <h1 className="mb-8 md:mb-16">View all of our products!</h1>
+          <FilterIcon
+            className="h-5 w-5 text-black cursor-pointer"
+            onClick={handleFilter}
+          />
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum,
-            labore natus et tempora vero facere totam sed repudiandae, quidem
-            asperiores ea ad beatae iusto nemo hic iste non. Unde, officiis.
-            Possimus beatae corporis suscipit ad ducimus, odio culpa, sequi
-            ratione optio aut doloremque expedita vitae qui ut. Culpa deserunt
-            praesentium saepe earum. Id eveniet cupiditate impedit incidunt
-            aspernatur voluptas in. Voluptatibus earum, unde provident totam
-            quibusdam quaerat consequatur reiciendis, veniam molestias quis
-            expedita omnis deleniti, a nulla ipsum ad neque culpa explicabo quas
-            aperiam repellat eligendi deserunt distinctio rerum. Sint. Culpa
-            natus molestiae, alias atque tenetur vel. Itaque eum corporis
-            cupiditate illo odit voluptatum natus at libero eius hic vero alias
-            aut quos modi, magni placeat exercitationem, vel ipsam vitae? Vitae
-            esse eos, tempore quo ducimus maiores animi corporis cupiditate
-            ullam qui sapiente culpa veritatis corrupti, ut provident veniam
-            doloribus magnam impedit deleniti officiis, deserunt itaque commodi
-            tempora repudiandae? Voluptate?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+            nulla incidunt fugit pariatur harum suscipit ex odit dolorem
+            voluptatum natus eos accusantium odio, numquam dolores vel amet
+            quisquam quis. Debitis eveniet perferendis impedit, explicabo enim
+            dolorum doloribus. Illo repellat quas omnis nulla eius soluta
+            reprehenderit veritatis, vel, impedit autem voluptates?
           </p>
+        </Container>
+      </section>
+
+      <section id="products-list">
+        <Container
+          classes={"flex flex-wrap justify-between  gap-y-4 md:gap-y-8"}
+        >
+          {productData.map((product) => {
+            return (
+              <Card
+                classes={
+                  "basis-full sm:basis-[48%] lg:basis-[32%]  border-2 rounded-lg b-dark/20"
+                }
+                key={product.id}
+                image={product.image}
+                title={product.title}
+                price={product.price}
+                description={product.description}
+              />
+            );
+          })}
         </Container>
       </section>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const res = await fetch(`https://fakestoreapi.com/products`);
+
+  const data = await res.json();
+  return {
+    props: {
+      products: data,
+    },
+  };
 }
