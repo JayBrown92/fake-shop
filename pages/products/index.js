@@ -21,6 +21,8 @@ export default function products({ products }) {
         const data = await res.json();
 
         setProductData(data);
+      } else {
+        setProductData(products);
       }
     };
 
@@ -71,7 +73,7 @@ export default function products({ products }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const res = await fetch(`https://fakestoreapi.com/products`);
 
   const data = await res.json();
